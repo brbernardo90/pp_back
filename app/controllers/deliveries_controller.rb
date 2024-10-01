@@ -4,7 +4,8 @@ class DeliveriesController < ApplicationController
   
     # GET /apartments/:apartment_id/deliveries
     def index
-      @deliveries = @apartment.deliveries
+    #   @deliveries = @apartment.deliveries
+      @deliveries = Delivery.all
       render json: @deliveries
     end
   
