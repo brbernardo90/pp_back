@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  block: MyString
+  number: 1
+  received_at: 2024-10-01
+  reader_code: MyString
+  apartment: one
+
+two:
+  block: MyString
+  number: 1
+  received_at: 2024-10-01
+  reader_code: MyString
+  apartment: two
