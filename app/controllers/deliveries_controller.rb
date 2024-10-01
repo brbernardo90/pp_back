@@ -1,5 +1,5 @@
 class DeliveriesController < ApplicationController
-    before_action :set_apartment
+    before_action :set_apartment, except: [:index]
     before_action :set_delivery, only: [:show, :update, :destroy]
   
     # GET /apartments/:apartment_id/deliveries
