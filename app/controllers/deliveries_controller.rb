@@ -1,5 +1,5 @@
 class DeliveriesController < ApplicationController
-    before_action :set_apartment, except: [:index]
+    before_action :set_apartment, except: [:index, :show, :find_by_reader_code]
     before_action :set_delivery, only: [:show, :update, :destroy]
   
     # GET /apartments/:apartment_id/deliveries
@@ -11,7 +11,20 @@ class DeliveriesController < ApplicationController
   
     # GET /apartments/:apartment_id/deliveries/:id
     def show
+      
+
       render json: @delivery
+    end
+
+      # GET /deliveries/find_by_reader_code/:reader_code
+    def find_by_reader_code
+        @delivery = Delivery.find_by(reader_code: params[:reader_code])
+
+        if @delivery
+            render json: @delivery
+        else
+            render json: { error: 'Delivery not found' }, status: :not_found
+        end
     end
   
     # POST /apartments/:apartment_id/deliveries
@@ -55,7 +68,7 @@ class DeliveriesController < ApplicationController
   
     # Only allow a trusted parameter "white list" through.
     def delivery_params
-      params.require(:delivery).permit(:block, :number, :received_at, :reader_code, :apartment_id)
+      params.require(:delivery).permit(:block, :number, :received_at, :reader_code, :apartment_id, :status)
     end
-  end
+end
   

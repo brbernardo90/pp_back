@@ -1,3 +1,4 @@
 class Resident < ApplicationRecord
-  belongs_to :apartment
+  has_many :apartment_residents
+  has_many :apartments, through: :apartment_residents
 end

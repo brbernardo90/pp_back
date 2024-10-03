@@ -13,4 +13,35 @@ Rails.application.routes.draw do
   resources :vehicles, only: [:index, :create, :show, :update, :destroy]
   resources :deliveries, only: [:index, :create, :show, :update, :destroy]
 
+  resources :deliveries do
+    collection do
+      post 'find_by_reader_code', to: 'deliveries#find_by_reader_code'
+    end
+  end
+
+  resources :residents do
+    member do
+      get 'details'
+    end
+  end
+
+  resources :apartments do
+    member do
+      get 'details'
+    end
+  end
+
+  resources :apartment_residents, only: [:index, :create, :show, :update, :destroy]
+
+  resources :residents do
+    # Nested route to get apartment_residents for a resident
+    get 'apartment_residents', to: 'apartment_residents#by_resident'
+    # post 'apartment_residents', to: 'apartment_residents#create'
+  end
+
+  resources :apartments do
+    # Nested route to get apartment_residents for an apartment
+    get 'apartment_residents', to: 'apartment_residents#by_apartment'
+    # post 'apartment_residents', to: 'apartment_residents#create'
+  end
 end
